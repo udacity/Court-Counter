@@ -84,7 +84,7 @@
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_marginTop="16dp"
-            android:background="@android:color/darker_gray" />
+            android:background="@android:color/keyguard_text_color_decline" />
 
         <LinearLayout
             android:layout_width="0dp"
