@@ -16,7 +16,8 @@
 package com.example.android.courtcounter;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity;//for android users//
+// import androidx.appcompat.app.AppCompatActivity;   // for androidx users//
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
