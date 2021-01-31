@@ -16,7 +16,6 @@
 package com.example.android.courtcounter;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +24,7 @@ import android.widget.TextView;
 /**
  * This activity keeps track of the basketball score for 2 teams.
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity<AppCompatActivity> extends AppCompatActivity {
 
     // Tracks the score for Team A
     int scoreTeamA = 0;
@@ -56,10 +55,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Increase the score for Team A by 3 points.
+     * Increase the score for Team A by 4 points.
      */
     public void addThreeForTeamA(View v) {
-        scoreTeamA = scoreTeamA + 3;
+        scoreTeamA = scoreTeamA + 4;
         displayForTeamA(scoreTeamA);
     }
 
@@ -80,10 +79,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Increase the score for Team B by 3 points.
+     * Increase the score for Team B by 4 points.
      */
     public void addThreeForTeamB(View v) {
-        scoreTeamB = scoreTeamB + 3;
+        scoreTeamB = scoreTeamB + 4;
         displayForTeamB(scoreTeamB);
     }
 
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
      * Displays the given score for Team A.
      */
     public void displayForTeamA(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.team_a_score);
+        TextView scoreView = (TextView) scoreView.findViewById();
         scoreView.setText(String.valueOf(score));
     }
 
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
      * Displays the given score for Team B.
      */
     public void displayForTeamB(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.team_b_score);
+        TextView scoreView = (TextView) scoreView.findViewById();
         scoreView.setText(String.valueOf(score));
     }
 }

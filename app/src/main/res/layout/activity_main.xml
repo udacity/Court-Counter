@@ -59,7 +59,7 @@
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
                 android:onClick="addThreeForTeamA"
-                android:text="+3 Points" />
+                android:text="+4 Points" />
 
             <Button
                 android:layout_width="match_parent"
@@ -120,7 +120,7 @@
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
                 android:onClick="addThreeForTeamB"
-                android:text="+3 Points" />
+                android:text="+4 Points" />
 
             <Button
                 android:layout_width="match_parent"
