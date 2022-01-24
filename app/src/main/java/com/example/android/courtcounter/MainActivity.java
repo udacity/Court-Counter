@@ -17,10 +17,11 @@ package com.example.android.courtcounter;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewbinding.ViewBindings;
 import androidx.lifecycle.ViewModelProvider;
-
 import android.view.View;
 import android.widget.TextView;
+import com.example.android.courtcounter.databinding.ActivityMainBinding;
 
 /**
  * This activity keeps track of the basketball score for 2 teams.
@@ -29,16 +30,26 @@ public class MainActivity extends AppCompatActivity {
 
     // Tracks the score for Teams
     int scoreTeamB = 0;
-    ScoreViewModel mScoreViewModel;
+    private ScoreViewModel mScoreViewModel;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
 
-        //Gets the View Model Reference
+        //Gets the View Model Reference and add databinding
         mScoreViewModel = new ViewModelProvider(this).get(ScoreViewModel.class);
-        displayForTeamA(mScoreViewModel.ScoreTeamA); // Load from the View Model on config change
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        //binding.teamAScore.setText(String.valueOf(mScoreViewModel.getScoreTeamA().getValue()));
+
+        //Callback for when the ScoreTeamA value is changed
+        mScoreViewModel.getScoreTeamA().observe(this, ScoreTeamA -> {
+            binding.teamAScore.setText(String.valueOf(mScoreViewModel.getScoreTeamA().getValue()));
+        });
+
+        //displayForTeamA(mScoreViewModel.ScoreTeamA.getValue()); // Load from the View Model on config change
 
     }
 // region updates Team A using ViewModel to store data
@@ -46,30 +57,10 @@ public class MainActivity extends AppCompatActivity {
      * Update the score for Team A by 1 point using the View Model instance variables
      */
     public void addOneForTeamA(View v) {
-        mScoreViewModel.ScoreTeamA++;
-        displayForTeamA(mScoreViewModel.ScoreTeamA);
+        mScoreViewModel.addOne();
+        //binding.teamAScore.setText(String.valueOf(mScoreViewModel.getScoreTeamA().getValue()));
     }
-    /**
-     * Increase the score for Team A by 2 points.
-     */
-    public void addTwoForTeamA(View v) {
-        mScoreViewModel.ScoreTeamA = mScoreViewModel.ScoreTeamA + 2;
-        displayForTeamA(mScoreViewModel.ScoreTeamA);
-    }
-    /**
-     * Increase the score for Team A by 3 points.
-     */
-    public void addThreeForTeamA(View v) {
-        mScoreViewModel.ScoreTeamA = mScoreViewModel.ScoreTeamA + 3;
-        displayForTeamA(mScoreViewModel.ScoreTeamA);
-    }
-    /**
-     * Displays the given score for Team A.
-     */
-    public void displayForTeamA(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.team_a_score);
-        scoreView.setText(String.valueOf(score));
-    }
+
 // endregion updates Team A using ViewModel to store data
 
 // region updates Team B using Activity to store data
@@ -107,9 +98,7 @@ public class MainActivity extends AppCompatActivity {
      * Resets the score for both teams back to 0.
      */
     public void resetScore(View v) {
-        //Using ViewModel
-        mScoreViewModel.ScoreTeamA = 0;
-        displayForTeamA(mScoreViewModel.ScoreTeamA);
+
         //Using Activity class
         scoreTeamB = 0;
         displayForTeamB(scoreTeamB);
