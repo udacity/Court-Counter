@@ -17,10 +17,9 @@ package com.example.android.courtcounter;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewbinding.ViewBindings;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import android.view.View;
-import android.widget.TextView;
 import com.example.android.courtcounter.databinding.ActivityMainBinding;
 
 /**
@@ -36,32 +35,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
 
         //Gets the View Model Reference and add databinding
         mScoreViewModel = new ViewModelProvider(this).get(ScoreViewModel.class);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        //binding.teamAScore.setText(String.valueOf(mScoreViewModel.getScoreTeamA().getValue()));
-
-        //Callback for when the ScoreTeamA value is changed
-        mScoreViewModel.getScoreTeamA().observe(this, ScoreTeamA -> {
-            binding.teamAScore.setText(String.valueOf(mScoreViewModel.getScoreTeamA().getValue()));
-        });
-
-        //displayForTeamA(mScoreViewModel.ScoreTeamA.getValue()); // Load from the View Model on config change
-
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
+        binding.setViewModel(mScoreViewModel);
+        binding.setLifecycleOwner(this);
     }
-// region updates Team A using ViewModel to store data
-    /**
-     * Update the score for Team A by 1 point using the View Model instance variables
-     */
-    public void addOneForTeamA(View v) {
-        mScoreViewModel.addOne();
-        //binding.teamAScore.setText(String.valueOf(mScoreViewModel.getScoreTeamA().getValue()));
-    }
-
-// endregion updates Team A using ViewModel to store data
 
 // region updates Team B using Activity to store data
     /**
@@ -89,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
      * Displays the given score for Team B.
      */
     public void displayForTeamB(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.team_b_score);
-        scoreView.setText(String.valueOf(score));
+        binding.teamBScore.setText(String.valueOf(score));
     }
 // endregion updates Team B using Activity to store data
 

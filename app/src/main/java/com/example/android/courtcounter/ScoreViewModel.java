@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 public class ScoreViewModel extends ViewModel {
     // Use Live data for the Team A score
-    private MutableLiveData<Integer> ScoreTeamA;
+    private final MutableLiveData<Integer> ScoreTeamA;
 
     //Constructor
     public ScoreViewModel(){
@@ -15,7 +15,7 @@ public class ScoreViewModel extends ViewModel {
     }
      public LiveData<Integer> getScoreTeamA() { return ScoreTeamA; }
 
-    public void addOne() {
-        ScoreTeamA.setValue(ScoreTeamA.getValue()+1);
+    public void add(int points) {
+        ScoreTeamA.setValue(ScoreTeamA.getValue()+points);
     }
 }
