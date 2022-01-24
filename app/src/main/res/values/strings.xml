@@ -15,4 +15,6 @@
 <resources>
     <string name="app_name">Court Counter</string>
     <string name="action_settings">Settings</string>
+    <string name="TeamA">Team ViewModel</string>
+    <string name="TeamB">Team Activity Variable</string>
 </resources>
